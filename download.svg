@@ -1,0 +1,17 @@
+<svg width="500" height="250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sfondo trasparente -->
+  <rect width="100%" height="100%" fill="white"></rect>
+
+  <!-- Testo full name sopra -->
+  <text x="50%" y="40" font-family="Helvetica, sans-serif" font-size="28" fill="black" font-weight="bold" text-anchor="middle">
+    Elite Football Agency
+  </text>
+
+  <!-- Swoosh minimalista -->
+  <path d="M50,150 Q250,50 450,150" stroke="gold" stroke-width="14" fill="none" stroke-linecap="round"></path>
+
+  <!-- Testo acronimo sotto simbolo -->
+  <text x="50%" y="220" font-family="Helvetica, sans-serif" font-size="32" fill="black" font-weight="bold" text-anchor="middle">
+    EFA
+  </text>
+</svg>
