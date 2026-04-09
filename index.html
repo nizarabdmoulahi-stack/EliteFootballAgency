@@ -189,6 +189,55 @@ footer {
     padding: 30px;
 }
 
+/* COOKIE BANNER */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    padding: 20px 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+    z-index: 2000;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.cookie-banner p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-buttons button {
+    flex: 1;
+}
+
+.accept-btn {
+    background: linear-gradient(45deg, gold, orange);
+    color: black;
+}
+
+.reject-btn {
+    background: transparent;
+    border: 1px solid gold;
+    color: gold;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
 /* RESPONSIVE */
 @media(max-width: 768px){
     .hero h2 {
@@ -211,7 +260,6 @@ footer {
     </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="home">
     <video autoplay muted loop class="bg-video">
         <source src="https://cdn.coverr.co/videos/coverr-soccer-player-training-1570/1080p.mp4" type="video/mp4">
@@ -224,7 +272,6 @@ footer {
     </div>
 </section>
 
-<!-- SERVIZI -->
 <section id="servizi">
     <h2>I Nostri Servizi</h2>
     <div class="services">
@@ -242,7 +289,6 @@ footer {
         </div>
     </div>
 
-    <!-- STATS -->
     <div class="stats">
         <div class="stat">
             <h2 class="counter" data-target="120">0</h2>
@@ -259,7 +305,6 @@ footer {
     </div>
 </section>
 
-<!-- TEAM -->
 <section id="team">
     <h2>Il Nostro Team</h2>
     <div class="team">
@@ -278,7 +323,6 @@ footer {
     </div>
 </section>
 
-<!-- CONTATTI -->
 <section id="contatti">
     <h2>Contattaci</h2>
     <form>
@@ -293,7 +337,18 @@ footer {
     <p>© 2026 Elite Football Agency</p>
 </footer>
 
-<!-- SCRIPT -->
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+    <p>
+        Questo sito utilizza cookie per migliorare la tua esperienza di navigazione,
+        analizzare il traffico e offrire contenuti personalizzati.
+    </p>
+    <div class="cookie-buttons">
+        <button class="accept-btn" onclick="acceptCookies()">Accetta</button>
+        <button class="reject-btn" onclick="rejectCookies()">Rifiuta</button>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <script>
@@ -303,9 +358,8 @@ window.addEventListener("scroll", () => {
     document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
 });
 
-/* CARDS ANIMATION */
+/* CARDS */
 const cards = document.querySelectorAll(".card");
-
 window.addEventListener("scroll", () => {
     cards.forEach(card => {
         const top = card.getBoundingClientRect().top;
@@ -317,7 +371,6 @@ window.addEventListener("scroll", () => {
 
 /* COUNTER */
 const counters = document.querySelectorAll('.counter');
-
 counters.forEach(counter => {
     const update = () => {
         const target = +counter.getAttribute('data-target');
@@ -334,15 +387,33 @@ counters.forEach(counter => {
     update();
 });
 
-/* GSAP HERO */
+/* GSAP */
 gsap.from(".hero h2", {
     y: 100,
     opacity: 0,
     duration: 1.2
 });
 
+/* COOKIE */
+const cookieBanner = document.getElementById("cookieBanner");
+
+window.addEventListener("load", () => {
+    if (!localStorage.getItem("cookieChoice")) {
+        cookieBanner.style.display = "block";
+    }
+});
+
+function acceptCookies() {
+    localStorage.setItem("cookieChoice", "accepted");
+    cookieBanner.style.display = "none";
+}
+
+function rejectCookies() {
+    localStorage.setItem("cookieChoice", "rejected");
+    cookieBanner.style.display = "none";
+}
+
 </script>
 
 </body>
 </html>
-
